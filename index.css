@@ -14,8 +14,33 @@ body {
 	margin-top: 20px;
 }
 
+.movies-container {
+	display: flex;
+	flex-wrap: wrap;
 
+
+}
 
 .movie {
+	display: flex;
+	flex-wrap: wrap;
+	width: 300px;
 	margin: 10px;
+	padding: 10px 10px;
+	
 }
+
+.movie h3 {
+	display: flex;
+	flex-wrap: wrap;
+	width: 150px;
+}
+
+.movie button {
+	margin-bottom: 10px;
+	border-radius: 10px;
+	background-color: greenyellow;
+	color: black;
+	font: bold;
+}
+ 
