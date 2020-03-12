@@ -1,31 +1,17 @@
-localStorage.getItem('watchlist');
 
 document.addEventListener('DOMContentLoaded', function() {
-    var saveToWatchlist = function saveToWatchlist(imdbID) {
-        var movie = movieData.find(function(currentMovie) {
-           return currentMovie.imdbID == imdbID;
-        });
+    localStorage.getItem('watchlist');
 
-     var watchlistJSON = localStorage.getItem('watchlist');
-     var watchlist = JSON.parse(watchlistJSON);  
-     if (watchlist === null)
-     return []; 
 
-     watchlist.push(movie);
-     watchlistJSON = JSON.stringify(watchlist);
-     localStorage.setItem('watchlist', watchlistJSON);
-     }; 
-
-    var renderMovies = function renderMovies(movieArray) {
+     function renderWatchlist(Watchlist) {
         // Creating a variable with a .map method (methods by default are always functions)
-        moviesHTML = movieArray.map(function(currentMovie) {
+        var moviesHTML = Watchlist.map(function(savedMovie) {
            
         return  `
         <div>
-        <img src="${currentMovie.Poster}" width="150"/>
-        <h3>${currentMovie.Title}</h3>
-        <p>${currentMovie.Year}</p>
-        <button onclick="saveToWatchlist(${currentMovie.imdbID})">Add Movie</button> 
+        <img src="${savedMovie.Poster}" width="150"/>
+        <h3>${savedMovie.Title}</h3>
+        <p>${savedMovie.Year}</p>
         </div>
         ` 
     
@@ -33,16 +19,8 @@ document.addEventListener('DOMContentLoaded', function() {
        return moviesHTML;
     }
 
-    var renderData = function renderData() { 
-        //    document.getElementById("moviesContainer").innerHTML = renderMovies(movieData) 
-    document.getElementById("myForm").addEventListener('submit', function(e) {
-        e.preventDefault();
-        for (var i =0; i < 3; i++) {
-        document.getElementsByClassName("movie")[i].innerHTML = renderMovies(localStorage.getItem('watchlist'));
-        }; 
-        
-    })}
-    console.log(moviesHTML)
-    saveToWatchlist += renderData(); 
-    return renderData(); 
+var movies = document.getElementById('moviesContainer');
+movies.innerHTML = renderWatchlist(JSON.parse(localStorage.getItem('watchlist')));
+
+
 })

@@ -1,21 +1,9 @@
+
 document.addEventListener('DOMContentLoaded', function() {
 
-    var saveToWatchlist = function saveToWatchlist(imdbID) {
-        var movie = movieData.find(function(currentMovie) {
-           return currentMovie.imdbID == imdbID;
-        });
 
-     var watchlistJSON = localStorage.getItem('watchlist');
-     var watchlist = JSON.parse(watchlistJSON);  
-     if (watchlist === null)
-     return []; 
 
-     watchlist.push(movie);
-     watchlistJSON = JSON.stringify(watchlist);
-     localStorage.setItem('watchlist', watchlistJSON);
-     }; 
-
-    var renderMovies = function renderMovies(movieArray) {
+   function renderMovies(movieArray) {
         // Creating a variable with a .map method (methods by default are always functions)
         moviesHTML = movieArray.map(function(currentMovie) {
         return  `
@@ -23,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <img src="${currentMovie.Poster}" width="150"/>
         <h3>${currentMovie.Title}</h3>
         <p>${currentMovie.Year}</p>
-        <button onclick="saveToWatchList(${currentMovie.imdbID})">Add Movie</button> 
+        <button onclick="saveToWatchlist('${currentMovie.imdbID}')">Add Movie</button> 
         </div>
         ` 
     
@@ -31,23 +19,42 @@ document.addEventListener('DOMContentLoaded', function() {
        return moviesHTML;
     }
 
-       var renderData = function renderData() { 
+     
         //    document.getElementById("moviesContainer").innerHTML = renderMovies(movieData) 
-    document.getElementById("myForm").addEventListener('submit', function(e) {
+    document.getElementById("search-form").addEventListener('submit', function(e) {
         e.preventDefault();
-        for (var i =0; i < 3; i++) {
-        document.getElementsByClassName("movie")[i].innerHTML = renderMovies(movieData);
-        } 
-    })}; 
+
+        var movieContainer = document.getElementById("movieContainer")
+         return movieContainer.innerHTML = renderMovies(movieData);
+
+        
+    }); 
          
+    
     
      
      // END OF RENDER MOVIES FUNCTION
-     
-     renderData();
-    return saveToWatchlist;
    
  
 
 });
 
+function saveToWatchlist(imdbID) {
+    var movie = movieData.find(function(currentMovie) {
+       return currentMovie.imdbID == imdbID;
+    });
+
+ var watchlistJSON = localStorage.getItem('watchlist');
+ var watchlist = JSON.parse(watchlistJSON);  
+ if (watchlist == null) {
+     watchlist = []
+ } 
+     watchlist.push(movie);
+ 
+ 
+
+ watchlistJSON = JSON.stringify(watchlist);
+ localStorage.setItem('watchlist', watchlistJSON);
+ }; 
+
+ 
