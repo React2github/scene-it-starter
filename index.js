@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
    function renderMovies(movieArray) {
         // Creating a variable with a .map method (methods by default are always functions)
-        moviesHTML = movieArray.map(function(currentMovie) {
+        var moviesHTML = movieArray.map(function(currentMovie) {
         return  `
         <div>
         <img src="${currentMovie.Poster}" width="150"/>

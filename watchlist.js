@@ -1,9 +1,10 @@
 
 document.addEventListener('DOMContentLoaded', function() {
-    localStorage.getItem('watchlist');
+   var watchlistJson = localStorage.getItem('watchlist');
 
 
      function renderWatchlist(Watchlist) {
+         
         // Creating a variable with a .map method (methods by default are always functions)
         var moviesHTML = Watchlist.map(function(savedMovie) {
            
@@ -20,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 var movies = document.getElementById('moviesContainer');
-movies.innerHTML = renderWatchlist(JSON.parse(localStorage.getItem('watchlist')));
+movies.innerHTML = renderWatchlist(JSON.parse(watchlistJson));
 
 
 })
